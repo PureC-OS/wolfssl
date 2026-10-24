@@ -144,6 +144,17 @@ void XFREE(void *p, void *heap, int type)
     }
 }
 
+/* Kernel has no <ctype.h>; user_settings.h prototypes these for wolfSSL. */
+int tolower(int c)
+{
+    return (c >= 'A' && c <= 'Z') ? c - 'A' + 'a' : c;
+}
+
+int toupper(int c)
+{
+    return (c >= 'a' && c <= 'z') ? c - 'a' + 'A' : c;
+}
+
 void *XREALLOC(void *p, size_t n, void *heap, int type)
 {
     struct wolf_hdr *hdr;

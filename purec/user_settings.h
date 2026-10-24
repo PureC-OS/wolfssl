@@ -111,6 +111,53 @@
 #define NO_FILESYSTEM
 #define NO_WRITEV
 #define NO_MAIN_DRIVER
+/* types.h -> memory.h pulls <stdlib.h>; the kernel has none. */
+#define NO_STDLIB_H
+/* Mini-printer from purec/snprintf_purec.c (PureC libc has no stdio). */
+#define XSNPRINTF purec_snprintf
+
+/* STRING_USER/CTYPE_USER: PureC libc/kernel has no <string.h>/<ctype.h>.
+ * Prototypes live here; implementations come from src/lib/ (kernel),
+ * src/libc/ (ring 3) and purec/memory_*.c for the few holes. */
+#define STRING_USER
+#define CTYPE_USER
+
+#include <stddef.h>
+
+void *memcpy(void *dst, const void *src, size_t n);
+void *memmove(void *dst, const void *src, size_t n);
+void *memset(void *dst, int c, size_t n);
+int memcmp(const void *a, const void *b, size_t n);
+size_t strlen(const char *s);
+size_t strnlen(const char *s, size_t cap);
+char *strcpy(char *dst, const char *src);
+char *strncpy(char *dst, const char *src, size_t n);
+char *strcat(char *dst, const char *src);
+char *strncat(char *dst, const char *src, size_t n);
+int strcmp(const char *a, const char *b);
+int strncmp(const char *a, const char *b, size_t n);
+char *strstr(const char *haystack, const char *needle);
+int tolower(int c);
+int toupper(int c);
+
+#define XMEMCPY(d, s, l) memcpy((d), (s), (l))
+#define XMEMSET(b, c, l) memset((b), (c), (l))
+#define XMEMCMP(s1, s2, n) memcmp((s1), (s2), (n))
+#define XMEMMOVE(d, s, l) memmove((d), (s), (l))
+#define XSTRLEN(s1) strlen((s1))
+#define XSTRNCPY(s1, s2, n) strncpy((s1), (s2), (n))
+#define XSTRSTR(s1, s2) strstr((s1), (s2))
+#define XSTRNCMP(s1, s2, n) strncmp((s1), (s2), (n))
+#define XSTRCMP(s1, s2) strcmp((s1), (s2))
+#define XSTRNCAT(s1, s2, n) strncat((s1), (s2), (n))
+
+/* wc_strsep / wc_strcasecmp / wc_strncasecmp from wc_port.c. */
+#define USE_WOLF_STRSEP
+#define USE_WOLF_STRCASECMP
+#define USE_WOLF_STRNCASECMP
+
+#define XTOUPPER(c) toupper((c))
+#define XTOLOWER(c) tolower((c))
 
 /* No RTC yet: certificate validity windows are skipped in phase 1.
  * Phase 2 (TLS over TCP) must swap this for an XTIME implementation boot

@@ -62,6 +62,7 @@
 #define NO_FILESYSTEM
 #define NO_WRITEV
 #define NO_MAIN_DRIVER
+#define NO_STDLIB_H
 #define NO_ASN_TIME
 
 #define NO_PSK

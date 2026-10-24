@@ -1,6 +1,7 @@
 /* PureC OS wolfSSL heap: malloc/free/realloc of the PureC libc. */
 
 #include <stddef.h>
+#include <stdlib.h>
 
 int purec_host_GenerateSeed(unsigned char *output, unsigned int sz);
 
