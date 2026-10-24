@@ -103,14 +103,19 @@
 #define HAVE_HASHDRBG
 /* purec/seed_purec.c: RDRAND when available, RDTSC jitter otherwise. */
 #define CUSTOM_RAND_GENERATE_SEED purec_GenerateSeed
+int purec_GenerateSeed(unsigned char *output, unsigned int sz);
 
 /* ------------------------------------------------------------------------- */
 /* OS services                                                               */
 /* ------------------------------------------------------------------------- */
 
 #define NO_FILESYSTEM
+#define WOLFSSL_NO_SOCK
 #define NO_WRITEV
 #define NO_MAIN_DRIVER
+#define NO_CRYPT_BENCHMARK
+#define WOLFSSL_NO_ASSERT_H
+#define WOLFSSL_USER_LOG(message) do { (void)(message); } while (0)
 /* types.h -> memory.h pulls <stdlib.h>; the kernel has none. */
 #define NO_STDLIB_H
 /* Mini-printer from purec/snprintf_purec.c (PureC libc has no stdio). */
@@ -137,6 +142,9 @@ char *strncat(char *dst, const char *src, size_t n);
 int strcmp(const char *a, const char *b);
 int strncmp(const char *a, const char *b, size_t n);
 char *strstr(const char *haystack, const char *needle);
+char *wolfSSL_strnstr(const char *haystack, const char *needle, size_t n);
+int wc_strcasecmp(const char *a, const char *b);
+int wc_strncasecmp(const char *a, const char *b, size_t n);
 int tolower(int c);
 int toupper(int c);
 
@@ -147,9 +155,12 @@ int toupper(int c);
 #define XSTRLEN(s1) strlen((s1))
 #define XSTRNCPY(s1, s2, n) strncpy((s1), (s2), (n))
 #define XSTRSTR(s1, s2) strstr((s1), (s2))
+#define XSTRNSTR(s1, s2, n) wolfSSL_strnstr((s1), (s2), (n))
 #define XSTRNCMP(s1, s2, n) strncmp((s1), (s2), (n))
 #define XSTRCMP(s1, s2) strcmp((s1), (s2))
 #define XSTRNCAT(s1, s2, n) strncat((s1), (s2), (n))
+#define XSTRCASECMP(s1, s2) wc_strcasecmp((s1), (s2))
+#define XSTRNCASECMP(s1, s2, n) wc_strncasecmp((s1), (s2), (n))
 
 /* wc_strsep / wc_strcasecmp / wc_strncasecmp from wc_port.c. */
 #define USE_WOLF_STRSEP
