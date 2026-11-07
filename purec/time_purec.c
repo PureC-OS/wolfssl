@@ -4,11 +4,14 @@ struct purec_time_info {
     int64_t unix_seconds;
     uint32_t millis;
     int32_t tz_minutes;
+    uint64_t uptime_ms;
+    uint32_t source;
+    uint32_t reserved;
 };
 
 long purec_wolf_time(long *timer)
 {
-    struct purec_time_info info = {0, 0, 0};
+    struct purec_time_info info = {0, 0, 0, 0, 0, 0};
     int64_t result;
     __asm__ volatile("int $0x80"
                      : "=a"(result)
