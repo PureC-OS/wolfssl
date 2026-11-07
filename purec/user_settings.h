@@ -202,6 +202,7 @@ int toupper(int c);
 #define WOLFSSL_ALT_CERT_CHAINS
 #define WOLFSSL_NO_CLIENT_AUTH
 #undef NO_SESSION_CACHE
+#undef NO_FILESYSTEM
 #define OPENSSL_EXTRA
 #include <stdio.h>
 #include <ctype.h>
