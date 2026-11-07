@@ -142,6 +142,8 @@ char *strncat(char *dst, const char *src, size_t n);
 int strcmp(const char *a, const char *b);
 int strncmp(const char *a, const char *b, size_t n);
 char *strstr(const char *haystack, const char *needle);
+char *strtok_r(char *text, const char *delimiters, char **saved);
+#define XSTRTOK strtok_r
 char *wolfSSL_strnstr(const char *haystack, const char *needle, size_t n);
 int wc_strcasecmp(const char *a, const char *b);
 int wc_strncasecmp(const char *a, const char *b, size_t n);
@@ -173,7 +175,9 @@ int toupper(int c);
 /* No RTC yet: certificate validity windows are skipped in phase 1.
  * Phase 2 (TLS over TCP) must swap this for an XTIME implementation boot
  * from SYS_CPU_INFO uptime. */
+#ifndef WOLF_PUREC_TLS
 #define NO_ASN_TIME
+#endif
 
 /* ------------------------------------------------------------------------- */
 /* Protocols                                                                 */
@@ -182,6 +186,26 @@ int toupper(int c);
 #define NO_PSK
 #define NO_OLD_TLS
 #define NO_SESSION_CACHE
+
+#ifdef WOLF_PUREC_TLS
+#define WOLFSSL_TLS13
+#define HAVE_TLS_EXTENSIONS
+#define HAVE_SNI
+#define HAVE_SUPPORTED_CURVES
+#define HAVE_EXTENDED_MASTER
+#define HAVE_ALPN
+#define HAVE_ECC384
+#define HAVE_ECC521
+#define WOLFSSL_USER_IO
+#define WOLFSSL_PEM_TO_DER
+#define WOLFSSL_BASE64_ENCODE
+#define WOLFSSL_ALT_CERT_CHAINS
+#define WOLFSSL_NO_CLIENT_AUTH
+#define USER_TIME
+#define XTIME purec_wolf_time
+struct tm;
+struct tm *gmtime_r(const long *timer, struct tm *result);
+#endif
 
 /* ------------------------------------------------------------------------- */
 /* Build hygiene                                                             */
