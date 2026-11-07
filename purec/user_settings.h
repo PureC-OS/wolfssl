@@ -206,6 +206,9 @@ int toupper(int c);
 #include <ctype.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <time.h>
+#define HAVE_TM_TYPE
+#define HAVE_TIME_T_TYPE
 #define XISSPACE(c) isspace((c))
 #define XISASCII(c) isascii((c))
 #define XISALNUM(c) isalnum((c))
