@@ -91,6 +91,8 @@ $(USER_TARGET): $(USER_OBJECTS) $(TLS_OBJECTS)
 	$(AR) rcs $@ $^
 	@echo "libwolf -> $@"
 
+$(USER_OBJ_DIR)/wc_port.o: USER_CFLAGS_W += -Dgmtime=purec_wolf_gmtime -Dgmtime_r=purec_wolf_gmtime_r
+
 $(USER_OBJ_DIR)/%.o: $(SRC)/%.c
 	@mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(DEPFLAGS) $(USER_CFLAGS_W) -c $< -o $@
