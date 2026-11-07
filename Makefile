@@ -47,6 +47,8 @@ USER_SOURCES := $(COMMON_SOURCES) \
 	ecc.c \
 	rsa.c \
 	signature.c \
+	logging.c \
+	pkcs12.c \
 	wolfmath.c \
 	sp_int.c
 KERNEL_SOURCES := $(COMMON_SOURCES)
