@@ -201,6 +201,15 @@ int toupper(int c);
 #define WOLFSSL_BASE64_ENCODE
 #define WOLFSSL_ALT_CERT_CHAINS
 #define WOLFSSL_NO_CLIENT_AUTH
+#define OPENSSL_EXTRA
+#include <stdio.h>
+#include <ctype.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#define HAVE_EX_DATA
+#define WOLFSSL_KEY_GEN
+#define WOLFSSL_CERT_GEN
+#define WOLFSSL_CERT_EXT
 #define USER_TIME
 #define XTIME purec_wolf_time
 struct tm;

@@ -68,7 +68,7 @@ TLS_OBJECTS := $(TLS_SOURCES:%.c=$(USER_OBJ_DIR)/tls_%.o)
 TLS_OBJECTS += $(USER_OBJ_DIR)/time_purec.o $(USER_OBJ_DIR)/strnstr_purec.o
 
 USER_TARGET := $(LIB_DIR)/libwolf.a
-USER_CFLAGS_W := $(USER_CFLAGS) -DWOLF_PUREC_TLS -include $(PORT)/purec_snprintf.h
+USER_CFLAGS_W := $(USER_CFLAGS) -I$(ROOT_DIR)/src/libc/include/hosted -DWOLF_PUREC_TLS -include $(PORT)/purec_snprintf.h
 USER_HOST_FLAGS := -std=c11 -Wall -Wextra -O2 -g \
 	-I$(WL) -I$(PORT) -DWOLFSSL_USER_SETTINGS
 HOST_OBJ_DIR := $(OBJ_DIR)/host
