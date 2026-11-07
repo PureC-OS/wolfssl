@@ -223,9 +223,6 @@ int toupper(int c);
 #define XISLOWER(c) islower((c))
 #define XISPRINT(c) isprint((c))
 #define HAVE_EX_DATA
-#define WOLFSSL_KEY_GEN
-#define WOLFSSL_CERT_GEN
-#define WOLFSSL_CERT_EXT
 #define USER_TIME
 #define XTIME purec_wolf_time
 struct tm;
