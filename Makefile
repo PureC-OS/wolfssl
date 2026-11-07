@@ -65,7 +65,7 @@ KERNEL_OBJECTS += $(KERN_OBJ_DIR)/seed_purec.o
 SO_OBJECTS := $(USER_OBJECTS:$(USER_OBJ_DIR)/%=$(SO_OBJ_DIR)/%)
 TLS_SOURCES := ssl.c internal.c keys.c tls.c tls13.c wolfio.c
 TLS_OBJECTS := $(TLS_SOURCES:%.c=$(USER_OBJ_DIR)/tls_%.o)
-TLS_OBJECTS += $(USER_OBJ_DIR)/time_purec.o
+TLS_OBJECTS += $(USER_OBJ_DIR)/time_purec.o $(USER_OBJ_DIR)/strnstr_purec.o
 
 USER_TARGET := $(LIB_DIR)/libwolf.a
 USER_CFLAGS_W := $(USER_CFLAGS) -DWOLF_PUREC_TLS -include $(PORT)/purec_snprintf.h
@@ -94,6 +94,10 @@ $(USER_OBJ_DIR)/%.o: $(SRC)/%.c
 	$(CC) $(CPPFLAGS) $(DEPFLAGS) $(USER_CFLAGS_W) -c $< -o $@
 
 $(USER_OBJ_DIR)/tls_%.o: $(WL)/src/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(DEPFLAGS) $(USER_CFLAGS_W) -c $< -o $@
+
+$(USER_OBJ_DIR)/strnstr_purec.o: $(PORT)/strnstr_purec.c
 	@mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(DEPFLAGS) $(USER_CFLAGS_W) -c $< -o $@
 
