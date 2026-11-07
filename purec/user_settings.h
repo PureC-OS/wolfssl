@@ -206,6 +206,15 @@ int toupper(int c);
 #include <ctype.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#define XISSPACE(c) isspace((c))
+#define XISASCII(c) isascii((c))
+#define XISALNUM(c) isalnum((c))
+#define XISALPHA(c) isalpha((c))
+#define XISDIGIT(c) isdigit((c))
+#define XISXDIGIT(c) isxdigit((c))
+#define XISUPPER(c) isupper((c))
+#define XISLOWER(c) islower((c))
+#define XISPRINT(c) isprint((c))
 #define HAVE_EX_DATA
 #define WOLFSSL_KEY_GEN
 #define WOLFSSL_CERT_GEN
