@@ -72,7 +72,7 @@ TLS_OBJECTS += $(USER_OBJ_DIR)/time_purec.o $(USER_OBJ_DIR)/strnstr_purec.o
 USER_TARGET := $(LIB_DIR)/libwolf.a
 USER_CFLAGS_W := $(USER_CFLAGS) -I$(ROOT_DIR)/src/libc/include/hosted -DWOLF_PUREC_TLS -include $(PORT)/purec_snprintf.h
 USER_HOST_FLAGS := -std=c11 -Wall -Wextra -O2 -g \
-	-I$(WL) -I$(PORT) -DWOLFSSL_USER_SETTINGS -DWOLF_PUREC_HOST
+	-I$(WL) -I$(PORT) -DWOLFSSL_USER_SETTINGS -DWOLF_PUREC_HOST -D_DEFAULT_SOURCE
 HOST_OBJ_DIR := $(OBJ_DIR)/host
 HOST_TEST := $(BIN_DIR)/tests/wolfcrypt_test
 
