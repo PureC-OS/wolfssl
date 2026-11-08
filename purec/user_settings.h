@@ -2,7 +2,13 @@
  * Included by wolfssl/wolfcrypt/settings.h when -DWOLFSSL_USER_SETTINGS is set.
  * Shared by the userspace library (libwolf.a) and the kernel module (wolf.ko).
  * The kernel build additionally defines WOLF_PUREC_KERNEL.
+ * The host unit test (make test-wolfcrypt) defines WOLF_PUREC_HOST and uses
+ * user_settings_host.h instead.
  */
+
+#ifdef WOLF_PUREC_HOST
+#include "user_settings_host.h"
+#else
 
 #ifndef PUREC_WOLFSSL_USER_SETTINGS_H
 #define PUREC_WOLFSSL_USER_SETTINGS_H
@@ -236,3 +242,5 @@ struct tm *gmtime_r(const long *timer, struct tm *result);
 #define WOLFSSL_IGNORE_FILE_WARN
 
 #endif /* PUREC_WOLFSSL_USER_SETTINGS_H */
+
+#endif /* WOLF_PUREC_HOST */

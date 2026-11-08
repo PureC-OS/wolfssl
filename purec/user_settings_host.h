@@ -58,6 +58,7 @@
 
 #define HAVE_HASHDRBG
 #define CUSTOM_RAND_GENERATE_SEED purec_host_GenerateSeed
+int purec_host_GenerateSeed(unsigned char *output, unsigned int sz);
 
 #define NO_FILESYSTEM
 #define NO_WRITEV
